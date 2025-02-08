@@ -33,6 +33,9 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Fetch data & Update
+        env:
+          WECHAT_TOKEN: ${{ secrets.WECHAT_TOKEN }}
+          WECHAT_COOKIE: ${{ secrets.WECHAT_COOKIE }}
         run: |
           # config git
           git config --local user.email "bot@github.com"
