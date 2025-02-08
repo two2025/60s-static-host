@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -48,10 +50,11 @@ jobs:
           # run update script
           pnpm run update
 
+          git add -A .
+
           # check if there are changes
           if ! git diff --quiet; then
             # if there are changes, commit & push
-            git add -A
             git commit -m "chore: [bot] update static data"
             git push
           else
