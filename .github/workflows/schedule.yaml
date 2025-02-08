@@ -1,0 +1,56 @@
+name: schedule
+
+on:
+  schedule:
+    - cron: '10 0,4,7,9,23 * * *'
+  workflow_dispatch:
+    inputs:
+      manual_trigger:
+        required: false
+        default: 'false'
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    env:
+      TZ: Asia/Shanghai
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Fetch data & Update
+        run: |
+          # config git
+          git config --local user.email "bot@github.com"
+          git config --local user.name "bot"
+          git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+
+          # pull latest code
+          git pull --rebase
+
+          # run update script
+          pnpm run update
+
+          # check if there are changes
+          if ! git diff --quiet; then
+            # if there are changes, commit & push
+            git add -A
+            git commit -m "chore: [bot] update static data"
+            git push
+          else
+            echo "No changes to commit"
+          fi
