@@ -50,10 +50,11 @@ jobs:
           # run update script
           pnpm run update
 
+          # Add all changes to staging
           git add -A .
 
-          # check if there are changes
-          if ! git diff --quiet; then
+          # check if there are changes (including new files)
+          if [ -n "$(git status --porcelain)" ]; then
             # if there are changes, commit & push
             git commit -m "chore: [bot] update static data"
             git push
