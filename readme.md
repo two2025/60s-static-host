@@ -17,7 +17,9 @@ A lightweight repository hosting daily news data, automatically updated via GitH
 Access the latest data through:
 
 ```url
-https://raw.githubusercontent.com/vikiboss/60s-static-host/main/static/[year]-[month]-[day].json
+# https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/2025-02-08.json
+
+https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/[yyyy]-[MM]-[dd].json
 ```
 
 ## Features
