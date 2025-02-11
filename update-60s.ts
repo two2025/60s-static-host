@@ -33,9 +33,8 @@ fetchArticles({ fakeid, token, cookie }).then(({ isOK, list, count, error }) => 
   if (isOK) {
     const [_, month, day] = today.split('-').map(Number)
     const todayTitle = `${month}月${day}日`
-    const targetArticle = list.find(e =>
-      [todayTitle, '读懂世界'].some(title => e.title.includes(title))
-    )
+    const targetArticle = list.find(e => [todayTitle, '读懂世界'].every(t => e.title.includes(t)))
+
     if (!targetArticle) {
       console.error(`expected article not update, need title: '${todayTitle}' && '读懂世界'`)
       process.exit(0)
