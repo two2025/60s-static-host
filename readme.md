@@ -10,27 +10,27 @@ A lightweight repository hosting daily news data, automatically updated via GitH
 - 📰 Stores curated news data
 - 🚀 Fast static hosting
 - 🔑 Easy data access
-- 📊 JSON format
+- 📊 REST API friendly & JSON format
 
 ## Usage
 
 Access the latest data through:
 
-```url
-# https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/2025-02-08.json
+- GitHub Raw URL: https://raw.githubusercontent.com
+- jsDelivr CDN: https://cdn.jsdelivr.net/gh
 
-https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/[yyyy]-[MM]-[dd].json
-```
+> [!TIP]
+> Replace `[yyyy]-[MM]-[dd]` with the desired date in `YYYY-MM-DD` format, such as `2025-02-08`.
 
-## Features
+- GitHub Raw URL: `https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/[yyyy]-[MM]-[dd].json`
+- jsDelivr CDN: `https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/[yyyy]-[MM]-[dd].json`
 
-- Automated daily data collection
-- Static file hosting via GitHub
-- Version controlled data history
-- Zero maintenance required
-- REST API friendly format
+Example:
 
-## Data Format
+- GitHub Raw URL: https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/2025-02-08.json
+- jsDelivr CDN: https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/2025-02-08.json
+
+## Data Format Example
 
 All data is stored in JSON format with consistent structure, for example:
 
