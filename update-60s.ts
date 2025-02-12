@@ -31,18 +31,19 @@ if (!fakeid || !token || !cookie) {
 }
 
 const [_, month, day] = date.split('-').map(Number)
+const query = `${month}月${day}日`
 
 fetchArticles({
   fakeid,
   token,
   cookie,
-  query: `${month}月${day}日`,
+  query,
 }).then(({ isOK, list, error }) => {
   if (isOK) {
     const targetArticle = list.find(e => e.title.includes('读懂世界'))
 
     if (!targetArticle) {
-      console.error(`expected article not update, need title: '读懂世界'`)
+      console.error(`expected article not update, need title: ${query} & '读懂世界'`)
       process.exit(0)
     }
 
