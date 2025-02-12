@@ -62,7 +62,12 @@ jobs:
           # check if there are changes (including new files)
           if [ -n "$(git status --porcelain)" ]; then
             # if there are changes, commit & push
-            git commit -m "chore: [bot] update $(date '+%Y-%m-%d') data"
+            if [ -z "${{ github.event.inputs.date }}" ]; then
+                COMMIT_DATE=$(date '+%Y-%m-%d')
+            else
+                COMMIT_DATE=${{ github.event.inputs.date }}
+            fi
+            git commit -m "chore: [bot] update $COMMIT_DATE data"
             git push
           else
             echo "No changes to commit"
