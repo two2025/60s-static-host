@@ -30,7 +30,7 @@ if (!fakeid || !token || !cookie) {
   process.exit(1)
 }
 
-const [_, month, day] = date.split('-')
+const [_, month, day] = date.split('-').map(Number)
 
 fetchArticles({
   fakeid,
