@@ -5,18 +5,19 @@ import { paseArticleUrl } from './parse-article-url'
 
 const __dirname = new URL('.', import.meta.url).pathname
 
-const today = localeDate().replace(/\//g, '-')
+const inputDate = process.argv.slice(2).at(0)?.replace('--date=', '')
+const date = (inputDate || localeDate()).replace(/\//g, '-')
 const static60sBase = path.resolve(__dirname, 'static/60s')
 
 if (!fs.existsSync(static60sBase)) {
   fs.mkdirSync(static60sBase, { recursive: true })
 }
 
-const todayFilepath = path.resolve(static60sBase, `${today}.json`)
-const hasToday = fs.existsSync(todayFilepath)
+const dateFilepath = path.resolve(static60sBase, `${date}.json`)
+const hasTargetDate = fs.existsSync(dateFilepath)
 
-if (hasToday) {
-  console.log(`data of [${today}] already exists, skipped`)
+if (hasTargetDate) {
+  console.log(`data of [${date}] already exists, skipped`)
   process.exit(0)
 }
 
@@ -29,14 +30,19 @@ if (!fakeid || !token || !cookie) {
   process.exit(1)
 }
 
-fetchArticles({ fakeid, token, cookie }).then(({ isOK, list, count, error }) => {
+const [_, month, day] = date.split('-')
+
+fetchArticles({
+  fakeid,
+  token,
+  cookie,
+  query: `${month}月${day}日`,
+}).then(({ isOK, list, error }) => {
   if (isOK) {
-    const [_, month, day] = today.split('-').map(Number)
-    const todayTitle = `${month}月${day}日`
-    const targetArticle = list.find(e => [todayTitle, '读懂世界'].every(t => e.title.includes(t)))
+    const targetArticle = list.find(e => e.title.includes('读懂世界'))
 
     if (!targetArticle) {
-      console.error(`expected article not update, need title: '${todayTitle}' && '读懂世界'`)
+      console.error(`expected article not update, need title: '读懂世界'`)
       process.exit(0)
     }
 
@@ -49,7 +55,7 @@ fetchArticles({ fakeid, token, cookie }).then(({ isOK, list, count, error }) => 
       }
 
       const data = {
-        date: today,
+        date: date,
         ...item,
         cover: targetArticle.cover,
         link: detailLink.split('&chksm=')[0] || '',
@@ -59,9 +65,9 @@ fetchArticles({ fakeid, token, cookie }).then(({ isOK, list, count, error }) => 
         updated_at: targetArticle.update_time * 1000,
       }
 
-      fs.writeFileSync(todayFilepath, JSON.stringify(data, null, 2))
+      fs.writeFileSync(dateFilepath, JSON.stringify(data, null, 2))
 
-      console.log(`data of [${today}] saved`)
+      console.log(`data of [${date}] saved`)
     })
   } else {
     throw new Error(error)

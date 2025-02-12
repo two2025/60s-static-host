@@ -4,6 +4,7 @@ interface FetchOptions {
   cookie: string
   begin?: number
   count?: number
+  query?: string
 }
 
 interface FetchResponse {
@@ -14,14 +15,14 @@ interface FetchResponse {
 }
 
 export async function fetchArticles(options: FetchOptions): Promise<FetchResponse> {
-  const { fakeid, token, cookie } = options
+  const { fakeid, token, cookie, query = '' } = options
 
   const url = new URL('https://mp.weixin.qq.com/cgi-bin/appmsg')
 
   Object.entries({
     action: 'list_ex',
     fakeid,
-    query: '',
+    query,
     begin: options?.begin ?? 0,
     count: options?.count ?? 4,
     type: 9,

@@ -9,9 +9,9 @@ on:
 
   workflow_dispatch:
     inputs:
-      manual_trigger:
+      date:
+        description: 'Optional data execution date in YYYY-MM-DD format.'
         required: false
-        default: 'false'
 
 jobs:
   fetch:
@@ -49,8 +49,12 @@ jobs:
           # pull latest code
           git pull --rebase
 
-          # run update script
-          pnpm run update
+          # run update script with an optional date, if provided
+          if [ -z "${{ github.event.inputs.date }}" ]; then
+            pnpm run update
+          else
+            pnpm run update --date=${{ github.event.inputs.date }}
+          fi
 
           # Add all changes to staging
           git add -A .
