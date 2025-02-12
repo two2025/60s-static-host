@@ -43,6 +43,11 @@ fetchArticles({ fakeid, token, cookie }).then(({ isOK, list, count, error }) => 
     const detailLink = targetArticle.link
 
     paseArticleUrl(detailLink).then(item => {
+      if (!item.news.length) {
+        console.log('no news found, data: ', JSON.stringify(item, null, 2))
+        process.exit(0)
+      }
+
       const data = {
         date: today,
         ...item,

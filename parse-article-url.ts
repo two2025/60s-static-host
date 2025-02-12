@@ -47,7 +47,7 @@ export async function paseArticleUrl(url: string) {
       .first()
       .attr(ATTR_NAME) || ''
 
-  console.log('=== html ===\n\n', html.slice(0, 300), '\n\n=== html ===\n\n')
+  console.log('=== html ===\n\n', html.slice(0, 3000), '\n\n=== html ===\n\n')
   console.log('=== news ===\n\n', news, '\n\n=== news ===\n\n')
   console.log('=== tip ===\n\n', tip, '\n\n=== tip ===\n\n')
   console.log('=== musicAudioId ===\n\n', musicAudioId, '\n\n=== musicAudioId ===\n\n')
