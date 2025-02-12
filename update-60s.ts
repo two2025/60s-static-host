@@ -9,6 +9,12 @@ const inputDate = process.argv.slice(2).at(0)?.replace('--date=', '')
 const date = (inputDate || localeDate()).replace(/\//g, '-')
 const static60sBase = path.resolve(__dirname, 'static/60s')
 
+console.log('debug: ', {
+  inputDate,
+  date,
+  static60sBase,
+})
+
 if (!fs.existsSync(static60sBase)) {
   fs.mkdirSync(static60sBase, { recursive: true })
 }
@@ -31,7 +37,9 @@ if (!fakeid || !token || !cookie) {
 }
 
 const [_, month, day] = date.split('-').map(Number)
-const query = `${month}月${day}日`
+const query = `${month}月${day}日 读懂世界`
+
+console.log(`fetching data of [${date}], query: ${query}`)
 
 fetchArticles({
   fakeid,
