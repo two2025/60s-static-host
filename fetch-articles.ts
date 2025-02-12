@@ -53,6 +53,14 @@ export async function fetchArticles(options: FetchOptions): Promise<FetchRespons
       }
     })
     .then(e => {
+      console.log(
+        'app_msg_list length',
+        e?.app_msg_list?.length,
+        e?.app_msg_list?.map((e: any) => e.title)?.join(', ')
+      )
+
+      console.log('app_msg_cnt', e?.app_msg_cnt)
+
       return {
         isOK: e?.base_resp?.ret === 0,
         list: (e?.app_msg_list || []) as ArticleItem[],
@@ -61,6 +69,7 @@ export async function fetchArticles(options: FetchOptions): Promise<FetchRespons
       }
     })
     .catch(err => {
+      console.error(err)
       return {
         isOK: false,
         list: [] as ArticleItem[],
