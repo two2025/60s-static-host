@@ -8,7 +8,11 @@ const NEWS_REG = /^\d+、/
 const END_REG = /[；！～。，]\s*$/
 
 export async function paseArticleUrl(url: string) {
-  const html = await fetch(url).then(e => e.text())
+  console.log('=== url ===\n\n', url, '\n\n=== url ===\n\n')
+
+  const html = await fetch(url)
+    .then(e => e.text())
+    .catch(() => fetch(url).then(e => e.text()))
 
   const $ = load(html)
   const news: string[] = []
@@ -20,6 +24,8 @@ export async function paseArticleUrl(url: string) {
     .toArray()
     .map(e => $(e).text())
     .filter(e => e.length >= 6)
+
+  console.log('=== span data ===\n\n', data, '\n\n=== span data ===\n\n')
 
   for (const line of data) {
     if (NEWS_REG.test(line)) {
@@ -40,6 +46,12 @@ export async function paseArticleUrl(url: string) {
       .filter((_, e) => !!$(e).attr('name')?.includes('读懂世界'))
       .first()
       .attr(ATTR_NAME) || ''
+
+  console.log('=== html ===\n\n', html.slice(0, 300), '\n\n=== html ===\n\n')
+  console.log('=== news ===\n\n', news, '\n\n=== news ===\n\n')
+  console.log('=== tip ===\n\n', tip, '\n\n=== tip ===\n\n')
+  console.log('=== musicAudioId ===\n\n', musicAudioId, '\n\n=== musicAudioId ===\n\n')
+  console.log('=== audioId ===\n\n', audioId, '\n\n=== audioId ===\n\n')
 
   return {
     news,
