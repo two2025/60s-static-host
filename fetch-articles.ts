@@ -17,6 +17,8 @@ interface FetchResponse {
 export async function fetchArticles(options: FetchOptions): Promise<FetchResponse> {
   const { fakeid, token, cookie, query = '' } = options
 
+  debug('options', options)
+
   const url = new URL('https://mp.weixin.qq.com/cgi-bin/appmsg')
 
   Object.entries({
@@ -34,6 +36,8 @@ export async function fetchArticles(options: FetchOptions): Promise<FetchRespons
   }).forEach(([key, value]) => {
     url.searchParams.append(key, value.toString())
   })
+
+  debug('url', url.toString())
 
   return fetch(url, {
     headers: {
@@ -53,13 +57,9 @@ export async function fetchArticles(options: FetchOptions): Promise<FetchRespons
       }
     })
     .then(e => {
-      console.log(
-        'app_msg_list length',
-        e?.app_msg_list?.length,
-        e?.app_msg_list?.map((e: any) => e.title)?.join(', ')
-      )
-
-      console.log('app_msg_cnt', e?.app_msg_cnt)
+      debug('app_msg_cnt', e?.app_msg_cnt)
+      debug('app_msg_list', e?.app_msg_list)
+      debug('title', e?.app_msg_list?.map((e: any) => e.title)?.join(', '))
 
       return {
         isOK: e?.base_resp?.ret === 0,
@@ -70,6 +70,7 @@ export async function fetchArticles(options: FetchOptions): Promise<FetchRespons
     })
     .catch(err => {
       console.error(err)
+
       return {
         isOK: false,
         list: [] as ArticleItem[],
@@ -113,4 +114,8 @@ export interface ArticleItem {
   tagid: any[]
   title: string
   update_time: number
+}
+
+function debug(name: any, value: any) {
+  console.log(`=== ${name} ===\n\n`, value, `\n\n=== ${name} ===\n\n`)
 }

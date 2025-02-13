@@ -3,7 +3,8 @@
   "type": "module",
   "packageManager": "pnpm@9.14.4",
   "scripts": {
-    "update": "esno ./update-60s.ts"
+    "update": "esno ./update-60s.ts",
+    "update:local": "esno --env-file=.env ./update-60s.ts"
   },
   "author": "Viki <hi@viki.moe> (https://github.com/vikiboss)",
   "license": "MIT",

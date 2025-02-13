@@ -5,15 +5,25 @@ import { paseArticleUrl } from './parse-article-url'
 
 const __dirname = new URL('.', import.meta.url).pathname
 
-const inputDate = process.argv.slice(2).at(0)?.replace('--date=', '')
+debug('process.argv', process.argv)
+
+const inputDate = process.argv
+  .slice(2)
+  .find(e => e.includes('--date='))
+  ?.replace('--date=', '')
+
+debug('inputDate', inputDate)
+
+if (inputDate && !/^\d{4}-\d{2}-\d{2}$/.test(inputDate)) {
+  console.error('invalid date format, expect: YYYY-MM-DD')
+  process.exit(1)
+}
+
 const date = (inputDate || localeDate()).replace(/\//g, '-')
 const static60sBase = path.resolve(__dirname, 'static/60s')
 
-console.log('debug: ', {
-  inputDate,
-  date,
-  static60sBase,
-})
+debug('date', date)
+debug('static60sBase', static60sBase)
 
 if (!fs.existsSync(static60sBase)) {
   fs.mkdirSync(static60sBase, { recursive: true })
@@ -39,6 +49,9 @@ if (!fakeid || !token || !cookie) {
 const [year, month, day] = date.split('-').map(Number)
 const query = `${month}月${day}日 读懂世界`
 
+debug('year month day', { year, month, day })
+debug('query', query)
+
 console.log(`fetching data of [${date}], query: ${query}`)
 
 fetchArticles({
@@ -49,13 +62,13 @@ fetchArticles({
 }).then(({ isOK, list, error }) => {
   if (isOK) {
     const targetArticle = list.find(e => {
-      const isTitleMatch = e.title.includes(query)
+      const isTitleMatch = e.title.includes('读懂世界')
       const isYearMatch = new Date(e.update_time * 1000).getFullYear() === year
       return isTitleMatch && isYearMatch
     })
 
     if (!targetArticle) {
-      console.error(`expected article not update, need title: ${query} & '读懂世界'`)
+      console.error(`expected article not update, need title: ${query}`)
       process.exit(0)
     }
 
@@ -77,6 +90,8 @@ fetchArticles({
         updated: localeTime(targetArticle.update_time * 1000),
         updated_at: targetArticle.update_time * 1000,
       }
+
+      debug('final data', data)
 
       fs.writeFileSync(dateFilepath, JSON.stringify(data, null, 2))
 
@@ -115,4 +130,8 @@ function localeTime(ts: number | string | Date = Date.now()) {
   })
 
   return formatter.format(now)
+}
+
+function debug(name: any, value: any) {
+  console.log(`=== ${name} ===\n\n`, value, `\n\n=== ${name} ===\n\n`)
 }
