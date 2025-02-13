@@ -36,7 +36,7 @@ if (!fakeid || !token || !cookie) {
   process.exit(1)
 }
 
-const [_, month, day] = date.split('-').map(Number)
+const [year, month, day] = date.split('-').map(Number)
 const query = `${month}月${day}日 读懂世界`
 
 console.log(`fetching data of [${date}], query: ${query}`)
@@ -48,7 +48,11 @@ fetchArticles({
   query,
 }).then(({ isOK, list, error }) => {
   if (isOK) {
-    const targetArticle = list.find(e => e.title.includes('读懂世界'))
+    const targetArticle = list.find(e => {
+      const isTitleMatch = e.title.includes(query)
+      const isYearMatch = new Date(e.update_time * 1000).getFullYear() === year
+      return isTitleMatch && isYearMatch
+    })
 
     if (!targetArticle) {
       console.error(`expected article not update, need title: ${query} & '读懂世界'`)
