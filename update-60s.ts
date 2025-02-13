@@ -63,8 +63,9 @@ fetchArticles({
   if (isOK) {
     const targetArticle = list.find(e => {
       const isTitleMatch = e.title.includes('读懂世界')
-      const isYearMatch = new Date(e.update_time * 1000).getFullYear() === year
-      return isTitleMatch && isYearMatch
+      const date = new Date(e.update_time * 1000)
+      const isDateMatch = date.getFullYear() === year && date.getMonth() + 1 === month
+      return isTitleMatch && isDateMatch
     })
 
     if (!targetArticle) {
