@@ -116,6 +116,6 @@ export interface ArticleItem {
   update_time: number
 }
 
-function debug(name: any, value: any) {
-  console.log(`=== ${name} ===\n\n`, value, `\n\n=== ${name} ===\n\n`)
+export function debug(name: any, value: any) {
+  console.log(`[${name}] => `, value, `\n`)
 }

@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { fetchArticles } from './fetch-articles'
+import { debug, fetchArticles } from './fetch-articles'
 import { paseArticleUrl } from './parse-article-url'
 
 const __dirname = new URL('.', import.meta.url).pathname
@@ -130,8 +130,4 @@ function localeTime(ts: number | string | Date = Date.now()) {
   })
 
   return formatter.format(now)
-}
-
-function debug(name: any, value: any) {
-  console.log(`=== ${name} ===\n\n`, value, `\n\n=== ${name} ===\n\n`)
 }

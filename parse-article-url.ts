@@ -1,4 +1,5 @@
 import { load } from 'cheerio'
+import { debug } from './fetch-articles'
 
 const TAG_NAME = 'mp-common-mpaudio'
 const ATTR_NAME = 'voice_encode_fileid'
@@ -8,7 +9,7 @@ const NEWS_REG = /^\d+、/
 const END_REG = /[；！～。，]\s*$/
 
 export async function paseArticleUrl(url: string) {
-  console.log('=== url ===\n\n', url, '\n\n=== url ===\n\n')
+  debug('url', url)
 
   const html = await fetch(url)
     .then(e => e.text())
@@ -25,7 +26,7 @@ export async function paseArticleUrl(url: string) {
     .map(e => $(e).text())
     .filter(e => e.length >= 6)
 
-  console.log('=== span data ===\n\n', data, '\n\n=== span data ===\n\n')
+  debug('data', data)
 
   for (const line of data) {
     if (NEWS_REG.test(line)) {
@@ -47,11 +48,11 @@ export async function paseArticleUrl(url: string) {
       .first()
       .attr(ATTR_NAME) || ''
 
-  console.log('=== html ===\n\n', html.slice(0, 3000), '\n\n=== html ===\n\n')
-  console.log('=== news ===\n\n', news, '\n\n=== news ===\n\n')
-  console.log('=== tip ===\n\n', tip, '\n\n=== tip ===\n\n')
-  console.log('=== musicAudioId ===\n\n', musicAudioId, '\n\n=== musicAudioId ===\n\n')
-  console.log('=== audioId ===\n\n', audioId, '\n\n=== audioId ===\n\n')
+  debug('html', html.slice(0, 3000))
+  debug('news', news)
+  debug('tip', tip)
+  debug('musicAudioId', musicAudioId)
+  debug('audioId', audioId)
 
   return {
     news,
