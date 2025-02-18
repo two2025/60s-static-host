@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { debug, fetchArticles } from './fetch-articles'
-import { paseArticleUrl } from './parse-article-url'
+import { debug, fetchArticles } from './fetch-articles.ts'
+import { paseArticleUrl } from './parse-article-url.ts'
 
 const __dirname = new URL('.', import.meta.url).pathname
 
