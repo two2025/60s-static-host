@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>60s Static Data Host</title>
+    <meta name="description" content="Automated daily news aggregation service with static JSON hosting">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --primary-color: #2563eb;
+            --secondary-color: #4b5563;
+            --border-color: #e5e7eb;
+            --code-bg: #f3f4f6;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1a1a1a;
+                --text-color: #ffffff;
+                --primary-color: #3b82f6;
+                --secondary-color: #9ca3af;
+                --border-color: #374151;
+                --code-bg: #1f2937;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .card-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .endpoint-list {
+            display: grid;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.9em;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--secondary-color);
+            font-size: 0.875rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>60s Static Data Host</h1>
+            <p>Automated daily news aggregation with multi-CDN hosting</p>
+        </header>
+
+        <div class="card-grid">
+            <div class="card">
+                <h2>Project Overview</h2>
+                <p>Automated daily news aggregation service providing structured JSON data through multiple CDN endpoints.</p>
+                <ul style="padding-left: 1.5rem; margin-top: 1rem;">
+                    <li>🔄 Auto-updated via GitHub Actions</li>
+                    <li>📰 Curated news summaries</li>
+                    <li>🚀 Multi-CDN distribution</li>
+                    <li>🔑 Simple REST API access</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>API Endpoints</h2>
+                <div class="endpoint-list">
+                    <div>
+                        <span class="badge">Vercel</span>
+                        <code>https://60s-static.viki.moe/60s/[date].json</code>
+                    </div>
+                    <div>
+                        <span class="badge">GitHub</span>
+                        <code>https://raw.githubusercontent.com/vikiboss/60s-static-host/main/static/60s/[date].json</code>
+                    </div>
+                    <div>
+                        <span class="badge">jsDelivr</span>
+                        <code>https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/[date].json</code>
+                    </div>
+                </div>
+                <p style="margin-top: 1rem;">Replace <code>[date]</code> with <code>YYYY-MM-DD</code> format (e.g. 2025-03-01)</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 3rem;">
+            <h2>Data Structure</h2>
+            <pre><code>{
+  "date": "2025-03-01",
+  "news": ["...", "..."],
+  "audio": {
+    "music": "URL",
+    "news": "URL"
+  },
+  "tip": "Daily inspiration quote",
+  "cover": "IMAGE_URL",
+  "link": "SOURCE_URL",
+  "created_at": 1740783600000
+}</code></pre>
+        </div>
+
+        <div class="card">
+            <h2>Project Info</h2>
+            <p>
+                <span class="badge">GitHub</span>
+                <a href="https://github.com/vikiboss/60s-static-host" target="_blank" rel="noopener">
+                    https://github.com/vikiboss/60s-static-host
+                </a>
+            </p>
+            <p style="margin-top: 1rem;">
+                <span class="badge">License</span>
+                MIT License - Open source with attribution required
+            </p>
+        </div>
+
+        <footer>
+            <p>© 2025 60s Static Host Project. Data sourced from public networks. No accuracy guarantees provided.</p>
+            <p style="margin-top: 0.5rem;">Not affiliated with any news organizations.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Auto-update date example
+        function formatDate(date) {
+            return date.toISOString().split('T')[0];
+        }
+        document.querySelectorAll('.date-example').forEach(el => {
+            el.textContent = formatDate(new Date());
+        });
+    </script>
+</body>
+</html>

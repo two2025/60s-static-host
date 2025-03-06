@@ -16,19 +16,22 @@ A lightweight repository hosting daily news data, automatically updated via GitH
 
 Access the latest data through:
 
+- Vercel CDN: https://60s-static.viki.moe
 - GitHub Raw URL: https://raw.githubusercontent.com
 - jsDelivr CDN: https://cdn.jsdelivr.net/gh
 
 > [!TIP]
 > Replace `[yyyy]-[MM]-[dd]` with the desired date in `YYYY-MM-DD` format, such as `2025-02-08`.
 
+- Vercel CDN: `https://60s-static.viki.moe/60s/[yyyy]-[MM]-[dd].json`
 - GitHub Raw URL: `https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/[yyyy]-[MM]-[dd].json`
 - jsDelivr CDN: `https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/[yyyy]-[MM]-[dd].json`
 
 Example:
 
-- GitHub Raw URL: https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/2025-02-08.json
-- jsDelivr CDN: https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/2025-02-08.json
+- GitHub Raw URL: https://60s-static.viki.moe/60s/2025-03-01.json
+- GitHub Raw URL: https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/2025-03-01.json
+- jsDelivr CDN: https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/2025-03-01.json
 
 ## Data Format Example
 
@@ -36,35 +39,35 @@ All data is stored in JSON format with consistent structure, for example:
 
 ```json
 {
-  "date": "2025-02-08",
+  "date": "2025-03-01",
   "news": [
-    "证监会：增强资本市场制度的包容性，支持优质科技型企业发行上市",
-    "教育部：学校应每学期核准一次学生学籍，严肃处理人籍分离、空挂学籍等问题",
-    "重庆：完善个人住房房产税试点政策，不再将市外人员购买普通住宅纳入征税范围",
-    "27座万亿GDP城市成绩单出炉：19城经济增速超全国水平，泉州领跑，总量方面，上海、北京、深圳、重庆、广州、苏州、成都、杭州、武汉和南京排在前十位",
-    "台媒：高雄惊现分尸案，确定3名女性遇害，73岁嫌犯被羁押",
-    "老挝：已对向缅甸大其力地区供电作出限制；外交部：中国正同泰缅等周边国家合作，共同铲除网赌、电诈毒瘤",
-    "泰国6日接收了61名被诱骗至缅甸电诈园区的外籍人员，包括39名中国公民",
-    "马斯克警告：若不立即改革过时的武器项目，美国将在未来战争中面临重大失败的风险",
-    "当地6日，美国阿拉斯加州一架载有10人的飞机失踪",
-    "特朗普：将签署命令，停止推广纸质吸管，\"重新回到塑料\"；美联邦法官裁定特朗普废除\"出生公民权\"行政令违宪",
-    "美国：将对国际刑事法院实施制裁，因其对美以\"采取非法且无根据的行动\"，国际刑事法院回应：谴责美方相关行为",
-    "印媒：印度总理莫迪将应邀于2月12日至13日访美，并与特朗普会谈",
-    "外媒：俄罗斯经济创历史新高，2024年GDP增长4.1%，达到历史最高水平的200万亿卢布",
-    "伊朗革命卫队接收首艘本土研发无人机航母，可搭载隐身无人机，该舰作战半径为22000海里，可在海上一年无需加油",
-    "以色列总理内塔尼亚胡：沙特的国土面积很大，巴勒斯坦人可去沙特领土上建国"
+    "证监会：东方集团披露的2020年至2023年财务信息严重不实，涉嫌重大财务造假，可能触及重大违法强制退市情形",
+    "湖南沅陵通报\"两船相撞致14人失联\"：截至2月28日晚，该起事故已致11人遇难，仍有5人失联",
+    "湖南长沙发布物业收费新规，空置房实行阶梯式优惠，媒体：有助于减轻住房持有成本、鼓励住房消费",
+    "黄山：3月3日起，黄山风景区、花山谜窟景区、太平湖景区三大景区对女性免门票7天，需至少提前1天预约",
+    "国家统计局：2024年GDP同比增长5%，人均超9.5万元！居民人均可支配收入41314元，比上年增长5.3%",
+    "28日，余华英被执行死刑，10年间拐卖17名儿童，连亲生骨肉也卖",
+    "现货黄金跳水：一周内金价自高点回落逾一百美元，金饰克价3天跌了18元",
+    "美方威胁以芬太尼问题为由对中国再加征10%关税，中方：望美方不要一错再错",
+    "美媒：美商务称已有25万人排队买特朗普移民金卡，将带来1.25万亿美元收入，美智库警告投资者或成\"冤大头\"",
+    "美媒：特朗普计划签署行政命令，将首次确定英语为美国官方语言",
+    "28日，比特币突然崩了！跌破81000美元，超15万人爆仓，近段时间，比特币被不断抛售，从峰值下跌了25%",
+    "尼加拉瓜宣布退出联合国人权理事会：滥用人权作为干预他国内政的借口",
+    "美媒：美国公布爱泼斯坦案首批文件，包括通讯录和“按摩师”名单等，有近百页被大段涂黑，美司法部长斥FBI私藏数千页文件不提交",
+    "微软宣布：已有21年历史的Skype，将于今年5月5日关停，建议用户迁移至Teams",
+    "当地28日，特朗普与泽连斯基会晤不欢而散，双方多次发生争论。美方：不再谈了直接签，协议不含任何美国支持乌方的承诺！特朗普：泽连斯基不尊重美国，可以在准备好实现和平时再回来，泽连斯基：至少要一句安全保障"
   ],
   "audio": {
-    "music": "https://res.wx.qq.com/voice/getvoice?mediaid=MzU2MDU4NDE1MV8yMjQ3NTI4MDY4",
-    "news": "https://res.wx.qq.com/voice/getvoice?mediaid=MzU2MDU4NDE1MV8yMjQ3NTI4MDY5"
+    "music": "https://res.wx.qq.com/voice/getvoice?mediaid=MzU2MDU4NDE1MV8yMjQ3NTI4NDY4",
+    "news": "https://res.wx.qq.com/voice/getvoice?mediaid=MzU2MDU4NDE1MV8yMjQ3NTI4NDY3"
   },
-  "tip": "世界不会因为你而难过，我们终将学会与自己好好相处",
-  "cover": "https://mmbiz.qlogo.cn/sz_mmbiz_jpg/ftdBHhoElSWicqiajvS2g1YickCW5ibS7Dibibh5StGA4r00QjjYVibEA26XHlhZnORDtMgiaWm1PnnA2Zl0gbnd1pNswg/0?wx_fmt=jpeg",
-  "link": "http://mp.weixin.qq.com/s?__biz=MzU2MDU4NDE1MQ==&mid=2247528070&idx=1&sn=81488ae3744998019e736084915b09fb",
-  "created": "2025/02/08 00:55:34",
-  "created_at": 1738947334000,
-  "updated": "2025/02/08 00:55:33",
-  "updated_at": 1738947333000
+  "tip": "不是每一次努力都会有收获，但是，每一次收获都必须努力，这是一个不公平的不可逆转的命题",
+  "cover": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ftdBHhoElSUZiaskicl9Dic4U8BRibRUECnOm8ibvSWmmwshWYbrfjbribylhgqpx93JKib7tuo3emKrbTTnheibHwAKOQ/0?wx_fmt=jpeg",
+  "link": "http://mp.weixin.qq.com/s?__biz=MzU2MDU4NDE1MQ==&mid=2247528469&idx=1&sn=bcf94efabe2079f576e694591c4400c3",
+  "created": "2025/03/01 07:00:00",
+  "created_at": 1740783600000,
+  "updated": "2025/03/01 07:00:00",
+  "updated_at": 1740783600000
 }
 ```
 
