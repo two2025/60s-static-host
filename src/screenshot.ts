@@ -24,7 +24,7 @@ const dateFilepath = path.resolve(static60sBase, `${date}.json`)
 
 if (!fs.existsSync(dateFilepath)) {
   console.error(`data of [${date}] not exists`)
-  process.exit(1)
+  process.exit(0)
 }
 
 const data = JSON.parse(fs.readFileSync(dateFilepath, 'utf-8'))
