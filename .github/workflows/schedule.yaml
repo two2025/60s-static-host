@@ -55,7 +55,7 @@ jobs:
 
           # run update script with an optional date, if provided
           if [ -z "${{ github.event.inputs.date }}" ]; then
-            pnpm run update && pnpm run pnpm run screenshot
+            pnpm run update && pnpm run screenshot
           else
             pnpm run update --date=${{ github.event.inputs.date }} && pnpm run screenshot --date=${{ github.event.inputs.date }}
           fi
