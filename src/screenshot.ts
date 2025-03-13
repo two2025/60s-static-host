@@ -62,9 +62,9 @@ async function screenshotAndSave(link: string) {
   const page = await browser.newPage()
   await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'light' }])
   await page.setViewport({ width: 1600, height: 800, deviceScaleFactor: 2 })
-  await page.goto(link, { waitUntil: 'load' })
+  await page.goto(link, { waitUntil: 'networkidle0' })
 
-  await new Promise(resolve => setTimeout(resolve, 3_000))
+  await new Promise(resolve => setTimeout(resolve, 12_000))
 
   const doms = (await page.$$('section')) || (await page.$$('body'))
   const dom = doms[3] || doms[0]
@@ -79,4 +79,6 @@ async function screenshotAndSave(link: string) {
   })
 
   await browser.close()
+
+  console.log(`screenshot saved to ${imageFilepath}`)
 }
