@@ -64,7 +64,7 @@ async function screenshotAndSave(link: string) {
   await page.setViewport({ width: 1600, height: 800, deviceScaleFactor: 2 })
   await page.goto(link, { waitUntil: 'networkidle0' })
 
-  await new Promise(resolve => setTimeout(resolve, 12_000))
+  await new Promise(resolve => setTimeout(resolve, 30_000))
 
   const doms = (await page.$$('section')) || (await page.$$('body'))
   const dom = doms[3] || doms[0]
