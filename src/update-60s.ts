@@ -2,6 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { debug, fetchArticles } from './fetch-articles.ts'
 import { paseArticleUrl } from './parse-article-url.ts'
+import { localeDate, localeTime } from './utils.ts'
 
 const __dirname = new URL('.', import.meta.url).pathname
 
@@ -20,7 +21,7 @@ if (inputDate && !/^\d{4}-\d{2}-\d{2}$/.test(inputDate)) {
 }
 
 const date = (inputDate || localeDate()).replace(/\//g, '-')
-const static60sBase = path.resolve(__dirname, 'static/60s')
+const static60sBase = path.resolve(__dirname, '../static/60s')
 
 debug('date', date)
 debug('static60sBase', static60sBase)
@@ -105,33 +106,3 @@ fetchArticles({
     throw new Error(error)
   }
 })
-
-function localeDate(ts: number | string | Date = Date.now()) {
-  const today = ts instanceof Date ? ts : new Date(ts)
-
-  const formatter = new Intl.DateTimeFormat('zh-CN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    timeZone: 'Asia/Shanghai',
-  })
-
-  return formatter.format(today)
-}
-
-function localeTime(ts: number | string | Date = Date.now()) {
-  const now = ts instanceof Date ? ts : new Date(ts)
-
-  const formatter = new Intl.DateTimeFormat('zh-CN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    hourCycle: 'h23',
-    minute: '2-digit',
-    second: '2-digit',
-    timeZone: 'Asia/Shanghai',
-  })
-
-  return formatter.format(now)
-}
