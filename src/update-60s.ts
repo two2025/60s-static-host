@@ -38,7 +38,7 @@ if (hasTargetDate) {
   process.exit(0)
 }
 
-const fakeid = process.env.WECHAT_FAKEID || 'MzkwNjY1ODIxNw=='
+const fakeid = process.env.WECHAT_FAKEID || 'MzkwNDc5NTA0Mw=='
 const token = process.env.WECHAT_TOKEN || ''
 const cookie = process.env.WECHAT_COOKIE || ''
 
