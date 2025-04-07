@@ -52,13 +52,15 @@ export async function paseArticleUrl(url: string) {
       .first()
       .attr(ATTR_NAME) || ''
 
-  const image =
-    $('img')
-      .filter((_, e) => !!$(e).attr('data-src'))
-      .last()
-      .attr('data-src') || ''
+  const images = $('img')
+    .map((_, e) => $(e).attr('data-src') || '')
+    .toArray()
+    .filter(e => !!e)
 
-  // debug('html', html.slice(0, 3000))
+  debug('images', images)
+
+  const image = images.at(-3) || images.at(0) || ''
+
   debug('news', news)
   debug('tip', tip)
   debug('musicAudioId', musicAudioId)
