@@ -4,7 +4,7 @@ import { debug } from './fetch-articles.ts'
 const TAG_NAME = 'mp-common-mpaudio'
 const ATTR_NAME = 'voice_encode_fileid'
 
-const TIP_REG = /^【微语】/
+const TIP_REG = /^【((微语)|(每日金句))】/
 const NEWS_REG = /^\d+、/
 const END_REG = /[；！～。，]\s*$/
 
