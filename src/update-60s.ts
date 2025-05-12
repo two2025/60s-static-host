@@ -38,7 +38,9 @@ if (hasTargetDate) {
   process.exit(0)
 }
 
-const fakeid = process.env.WECHAT_FAKEID || 'Mzk3NTMzOTU1Mg=='
+// MzkwNDc5NTA0Mw== 每天60秒读懂世界 mt36501
+// MzkwNjY1ODIxNw== 每天3分钟读懂世界 hao36501
+const fakeid = process.env.WECHAT_FAKEID || 'MzkwNDc5NTA0Mw=='
 const token = process.env.WECHAT_TOKEN || ''
 const cookie = process.env.WECHAT_COOKIE || ''
 
