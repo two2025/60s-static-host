@@ -1,0 +1,48 @@
+name: pull static data
+
+on:
+  schedule:
+    # 每小时的 0 分运行（每小时一次）
+    - cron: '0 * * * *'
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  sync-static-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 获取所有历史
+
+      - name: Set up Python for SVN
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install SVN
+        run: sudo apt-get install -y subversion
+
+      - name: Sync static directory
+        run: |
+          # 使用 svn 导出 static 目录
+          svn export \
+            --force \
+            "https://github.com/vikiboss/60s-static-host/trunk/static" \
+            ./static \
+            --username ${{ github.actor }}
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # 检查是否有变化
+          if git diff --quiet; then
+            echo "No changes detected"
+          else
+            git add -A
+            git commit -m "Auto-sync static data [$(date +'%Y-%m-%d %H:%M UTC')]"
+            git push
+          fi
