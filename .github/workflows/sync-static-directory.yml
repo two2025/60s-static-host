@@ -15,42 +15,58 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-
+          fetch-depth: 0  # 获取完整历史记录
+          
       - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "actions@users.noreply.github.com"
-          git remote add upstream https://github.com/vikiboss/60s-static-host.git
-          git fetch upstream
-
-      - name: Sync using safe branch method
+          git config pull.rebase false  # 设置合并策略
+          
+      - name: Add upstream repository
         run: |
-          # 获取当前分支
-          CURRENT_BRANCH=$(git branch --show-current)
-          echo "Current branch: $CURRENT_BRANCH"
+          git remote add upstream https://github.com/vikiboss/60s-static-host.git || true
+          git fetch upstream
           
-          # 创建并切换到临时分支
-          git checkout -b sync-temp-branch
+      - name: Create worktree for sync
+        run: |
+          # 创建临时工作目录
+          git worktree add sync-worktree upstream/main
           
-          # 重置指定目录到上游状态
-          git checkout upstream/main -- static
+      - name: Copy updated static directory
+        run: |
+          # 清空现有static目录（保留.gitignore等隐藏文件）
+          find static -mindepth 1 -delete
           
-          # 检查变化
-          if git diff --exit-code --quiet; then
+          # 复制所有文件（包括子目录）
+          cp -r sync-worktree/static/* static/
+          
+          # 列出所有更新文件（调试用）
+          echo "Updated files:"
+          find static -type f | sed 's/^/  /'
+          
+      - name: Commit and push changes
+        run: |
+          # 检查是否有变化
+          if git diff --quiet --exit-code; then
             echo "🟢 No changes detected"
-            # 切换回原始分支
-            git checkout $CURRENT_BRANCH
           else
-            echo "🟠 Changes detected"
+            echo "🟠 Changes detected - committing updates"
+            
+            # 添加所有static目录下的变更
             git add static/
+            
+            # 提交变更
             git commit -m "Auto-sync static data [$(date +'%Y-%m-%d %H:%M UTC')]"
             
-            # 切换回原始分支并合并
-            git checkout $CURRENT_BRANCH
-            git merge sync-temp-branch --no-ff -m "Merge static updates"
-            git push origin $CURRENT_BRANCH
+            # 推送变更
+            git push origin $(git branch --show-current)
           fi
           
-          # 删除临时分支（确保不在该分支上）
-          git branch -D sync-temp-branch
+      - name: Cleanup worktree
+        run: |
+          # 移除工作树
+          git worktree remove sync-worktree --force
+          
+          # 删除工作树目录
+          rm -rf sync-worktree
