@@ -29,14 +29,14 @@ jobs:
           # 使用 svn 导出 static 目录
           svn export \
             --force \
-            "https://github.com/vikiboss/60s-static-host/trunk/static" \
+            "https://github.com/vikiboss/60s-static-host/tree/main/static" \
             ./static \
             --username ${{ github.actor }}
 
       - name: Commit and push changes
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "216294726+myblsky66@users.noreply.github.com"
           
           # 检查是否有变化
           if git diff --quiet; then
