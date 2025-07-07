@@ -1,0 +1,71 @@
+name: Sync Fork Repository
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 每小时在0分执行（UTC时间）
+  workflow_dispatch:     # 允许手动触发
+
+permissions:
+  contents: write       # 允许推送更改
+  pull-requests: write  # 允许创建合并提交
+
+jobs:
+  sync-fork:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 获取完整历史记录
+          
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/vikiboss/60s-static-host.git
+          git fetch upstream
+          
+      - name: Get upstream default branch
+        id: branch
+        run: |
+          # 获取上游仓库的默认分支名
+          DEFAULT_BRANCH=$(git remote show upstream | grep 'HEAD branch' | cut -d' ' -f5)
+          echo "default_branch=$DEFAULT_BRANCH" >> $GITHUB_OUTPUT
+          
+      - name: Sync fork branch
+        uses: actions/github-script@v7
+        with:
+          script: |
+            try {
+              // 创建合并提交以同步分支
+              const result = await github.rest.repos.mergeUpstream({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                branch: '${{ steps.branch.outputs.default_branch }}',
+              })
+              
+              console.log(`Sync successful! Status: ${result.status}`)
+              console.log(`Merge commit SHA: ${result.data.merge_commit_sha}`)
+              
+              if (result.data.merged) {
+                console.log('✅ Successfully merged upstream changes')
+              } else {
+                console.log('ℹ️ No changes to merge')
+              }
+            } catch (error) {
+              console.error(`⚠️ Sync failed: ${error.message}`)
+              // 检查是否是冲突错误
+              if (error.message.includes('merge conflict')) {
+                console.log('::warning::Merge conflict detected. Manual resolution required.')
+              }
+              throw error
+            }
+            
+      - name: Push updates (if any)
+        if: success()
+        run: |
+          # 检查是否有需要推送的更改
+          if git diff --quiet HEAD upstream/${{ steps.branch.outputs.default_branch }}; then
+            echo "🟢 No changes to push"
+          else
+            echo "🟠 Pushing merged changes..."
+            git push origin ${{ steps.branch.outputs.default_branch }}
+          fi
