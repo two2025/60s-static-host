@@ -61,28 +61,25 @@ debug('query', query)
 
 console.log(`fetching data of [${date}], query: ${query}`)
 
-fetchArticles({
-  fakeid,
-  token,
-  cookie,
-  query,
-}).then(({ isOK, list, error }) => {
-  if (isOK) {
-    const targetArticle = list.find(e => {
-      const isTitleMatch = [queryDate, queryWord].every(word => e.title.includes(word))
-      const date = new Date(e.update_time * 1000)
-      const isDateMatch = date.getFullYear() === year && date.getMonth() + 1 === month
-      return isTitleMatch && isDateMatch
-    })
+fetchArticles({ fakeid, token, cookie, query }).then(({ isOK, list, error }) => {
+  if (!isOK) throw new Error(error)
 
-    if (!targetArticle) {
-      console.error(`expected article not update, need ${queryDate} and ${queryWord}`)
-      process.exit(0)
-    }
+  const targetArticle = list.find(e => {
+    const isTitleMatch = [queryDate, queryWord].every(word => e.title.includes(word))
+    const date = new Date(e.update_time * 1000)
+    const isDateMatch = date.getFullYear() === year && date.getMonth() + 1 === month
+    return isTitleMatch && isDateMatch
+  })
 
-    const detailLink = targetArticle.link
+  if (!targetArticle) {
+    console.error(`expected article not update, need ${queryDate} and ${queryWord}`)
+    process.exit(0)
+  }
 
-    paseArticleUrl(detailLink).then(item => {
+  const detailLink = targetArticle.link
+
+  paseArticleUrl(detailLink)
+    .then(item => {
       if (!item.news.length) {
         console.log('no news found, data: ', JSON.stringify(item, null, 2))
         process.exit(0)
@@ -91,7 +88,7 @@ fetchArticles({
       const data = {
         date: date,
         ...item,
-        cover: targetArticle.cover,
+        cover: item.cover || targetArticle.cover,
         link: detailLink.split('&chksm=')[0] || '',
         created: localeTime(targetArticle.create_time * 1000),
         created_at: targetArticle.create_time * 1000,
@@ -105,7 +102,8 @@ fetchArticles({
 
       console.log(`data of [${date}] saved`)
     })
-  } else {
-    throw new Error(error)
-  }
+    .catch(err => {
+      console.error('Error parsing article URL:', err)
+      process.exit(1)
+    })
 })
