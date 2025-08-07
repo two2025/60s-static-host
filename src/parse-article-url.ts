@@ -1,9 +1,6 @@
 import { load } from 'cheerio'
 import { debug } from './fetch-articles.ts'
 
-const TAG_NAME = 'mp-common-mpaudio'
-const ATTR_NAME = 'voice_encode_fileid'
-
 const TIP_REG = /^【((微语)|(每日金句))】/
 const NEWS_REG = /^\d+、/
 const END_REG = /[；！～。，]\s*$/
@@ -24,8 +21,7 @@ export async function paseArticleUrl(url: string) {
 
   let tip = ''
 
-  const data = $('div.rich_media_content section p > span')
-    // .filter((_, e) => e.children.length === 1)
+  const data = $('div.rich_media_content section p, section')
     .toArray()
     .map(e => $(e).text())
     .filter(e => e.length >= 6)
@@ -40,18 +36,6 @@ export async function paseArticleUrl(url: string) {
     }
   }
 
-  const musicAudioId =
-    $(TAG_NAME)
-      .filter((_, e) => !$(e).attr('name')?.includes('读懂世界'))
-      .first()
-      .attr(ATTR_NAME) || ''
-
-  const audioId =
-    $(TAG_NAME)
-      .filter((_, e) => !!$(e).attr('name')?.includes('读懂世界'))
-      .first()
-      .attr(ATTR_NAME) || ''
-
   const images = $('img')
     .map((_, e) => $(e).attr('data-src') || '')
     .toArray()
@@ -61,19 +45,28 @@ export async function paseArticleUrl(url: string) {
 
   const image = images.at(-3) || images.at(0) || ''
 
+  const cover =
+    $('img')
+      .map((_, e) => ({
+        src: $(e).attr('data-src') || '',
+        dataS: $(e).attr('data-s') || '',
+      }))
+      .toArray()
+      .filter(e => e.dataS === '300,640')
+      .at(0)?.src || ''
+
   debug('news', news)
   debug('tip', tip)
-  debug('musicAudioId', musicAudioId)
-  debug('audioId', audioId)
   debug('image', image)
+  debug('cover', cover)
 
   return {
     news,
-    audio: {
-      music: musicAudioId ? `https://res.wx.qq.com/voice/getvoice?mediaid=${musicAudioId}` : '',
-      news: audioId ? `https://res.wx.qq.com/voice/getvoice?mediaid=${audioId}` : '',
-    },
     image,
     tip,
+    cover,
+
+    // 仅做兼容保留
+    audio: { music: '', news: '' },
   }
 }
