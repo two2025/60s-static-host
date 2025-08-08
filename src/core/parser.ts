@@ -1,16 +1,14 @@
 import { load } from 'cheerio'
-import { debug } from './fetch-articles.ts'
+import { ParsedArticle } from '../types/index.js'
+import { debug } from '../utils/index.js'
+import { REGEX_PATTERNS, USER_AGENT } from '../config/index.js'
 
-const TIP_REG = /^【((微语)|(每日金句))】/
-const NEWS_REG = /^\d+、/
-const END_REG = /[；！～。，]\s*$/
-
-export async function paseArticleUrl(url: string) {
+export async function parseArticleUrl(url: string): Promise<ParsedArticle> {
   debug('url', url)
 
   const html = await fetch(url, {
     headers: {
-      'User-Agent': `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36`,
+      'User-Agent': USER_AGENT,
     },
   })
     .then(e => e.text())
@@ -29,10 +27,10 @@ export async function paseArticleUrl(url: string) {
   debug('data', data)
 
   for (const line of data) {
-    if (NEWS_REG.test(line)) {
-      news.push(line.replace(NEWS_REG, '').replace(END_REG, ''))
-    } else if (TIP_REG.test(line)) {
-      tip = line.replace(TIP_REG, '').replace(END_REG, '')
+    if (REGEX_PATTERNS.NEWS.test(line)) {
+      news.push(line.replace(REGEX_PATTERNS.NEWS, '').replace(REGEX_PATTERNS.END, ''))
+    } else if (REGEX_PATTERNS.TIP.test(line)) {
+      tip = line.replace(REGEX_PATTERNS.TIP, '').replace(REGEX_PATTERNS.END, '')
     }
   }
 
@@ -65,8 +63,6 @@ export async function paseArticleUrl(url: string) {
     image,
     tip,
     cover,
-
-    // 仅做兼容保留
     audio: { music: '', news: '' },
   }
 }
