@@ -29,7 +29,11 @@ export async function runUpdateCommand(): Promise<void> {
 
   try {
     const data = await fetchAndProcessArticle(date)
-    storage.saveData(date, data)
+    if (data) {
+      storage.saveData(date, data)
+    } else {
+      console.log(`No data found for date: ${date}, nothing to save`)
+    }
   } catch (error) {
     console.error('Error updating data:', error)
     process.exit(1)

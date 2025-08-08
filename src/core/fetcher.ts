@@ -4,7 +4,7 @@ import { parseArticleUrl } from './parser.js'
 import { debug, localeTime } from '../utils/index.js'
 import { getWeChatConfig } from '../config/index.js'
 
-export async function fetchAndProcessArticle(date: string): Promise<SavedData> {
+export async function fetchAndProcessArticle(date: string): Promise<SavedData | null> {
   const [year, month, day] = date.split('-').map(Number)
   const queryDate = `${month}月${day}日`
   const queryWord = '读懂世界'
@@ -30,14 +30,16 @@ export async function fetchAndProcessArticle(date: string): Promise<SavedData> {
   })
 
   if (!targetArticle) {
-    throw new Error(`Expected article not found, need ${queryDate} and ${queryWord}`)
+    console.log(`Expected article not found, need ${queryDate} and ${queryWord}`)
+    return null
   }
 
   const detailLink = targetArticle.link
   const parsedArticle = await parseArticleUrl(detailLink)
 
   if (!parsedArticle.news.length) {
-    throw new Error('No news found in article')
+    console.log(`No news found in article: ${detailLink}`)
+    return null
   }
 
   const data: SavedData = {
