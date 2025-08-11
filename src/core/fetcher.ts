@@ -1,8 +1,9 @@
-import { SavedData } from '../types/index.js'
-import { fetchArticles } from '../services/wechat.js'
-import { parseArticleUrl } from './parser.js'
-import { debug, localeTime } from '../utils/index.js'
-import { getWeChatConfig } from '../config/index.js'
+import { fetchArticles } from '../services/wechat'
+import { parseArticleUrl } from './parser'
+import { debug, localeTime } from '../utils'
+import { getWeChatConfig } from '../config'
+
+import type { SavedData } from '../types'
 
 export async function fetchAndProcessArticle(date: string): Promise<SavedData | null> {
   const [year, month, day] = date.split('-').map(Number)

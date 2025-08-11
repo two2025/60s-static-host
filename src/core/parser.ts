@@ -1,16 +1,13 @@
 import { load } from 'cheerio'
-import { ParsedArticle } from '../types/index.js'
-import { debug } from '../utils/index.js'
-import { REGEX_PATTERNS, USER_AGENT } from '../config/index.js'
+import { debug } from '../utils'
+import { REGEX_PATTERNS, USER_AGENT } from '../config'
+
+import type { ParsedArticle } from '../types'
 
 export async function parseArticleUrl(url: string): Promise<ParsedArticle> {
   debug('url', url)
 
-  const html = await fetch(url, {
-    headers: {
-      'User-Agent': USER_AGENT,
-    },
-  })
+  const html = await fetch(url, { headers: { 'User-Agent': USER_AGENT } })
     .then(e => e.text())
     .catch(() => fetch(url).then(e => e.text()))
 
@@ -23,6 +20,7 @@ export async function parseArticleUrl(url: string): Promise<ParsedArticle> {
     .toArray()
     .map(e => $(e).text())
     .filter(e => e.length >= 6)
+    .filter(text => !/；\d+、/.test(text))
 
   debug('data', data)
 

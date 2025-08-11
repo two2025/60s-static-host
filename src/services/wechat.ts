@@ -1,6 +1,7 @@
-import { FetchOptions, FetchResponse } from '../types/index.js'
-import { debug } from '../utils/index.js'
-import { USER_AGENT } from '../config/index.js'
+import { debug } from '../utils'
+import { USER_AGENT } from '../config'
+
+import type { FetchOptions, FetchResponse } from '../types'
 
 export async function fetchArticles(options: FetchOptions): Promise<FetchResponse> {
   const { fakeid, token, cookie, query = '' } = options
