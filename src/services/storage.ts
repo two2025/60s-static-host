@@ -1,7 +1,8 @@
 import path from 'node:path'
-import { SavedData } from '../types/index.js'
-import { ensureDir, fileExists, readJsonFile, writeJsonFile, getProjectRoot } from '../utils/index.js'
-import { PATHS } from '../config/index.js'
+import { PATHS } from '../config'
+import { ensureDir, fileExists, readJsonFile, writeJsonFile, getProjectRoot } from '../utils'
+
+import type { SavedData } from '../types'
 
 export class StorageService {
   private readonly projectRoot: string
@@ -12,7 +13,7 @@ export class StorageService {
     this.projectRoot = getProjectRoot()
     this.static60sPath = path.resolve(this.projectRoot, PATHS.STATIC_60S)
     this.staticImagesPath = path.resolve(this.projectRoot, PATHS.STATIC_IMAGES)
-    
+
     ensureDir(this.static60sPath)
     ensureDir(this.staticImagesPath)
   }

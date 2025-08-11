@@ -4,9 +4,9 @@
   "packageManager": "pnpm@10.6.2",
   "scripts": {
     "update": "esno ./src/update-60s.ts",
-    "update:local": "node --no-warnings --experimental-transform-types --env-file=.env ./src/update-60s.ts",
+    "update:local": "node ./src/update-60s.ts",
     "screenshot": "esno ./src/screenshot.ts",
-    "debug": "node --no-warnings --experimental-transform-types ./debug/index.ts"
+    "debug": "esno ./debug/index.ts"
   },
   "author": "Viki <hi@viki.moe> (https://github.com/vikiboss)",
   "license": "MIT",

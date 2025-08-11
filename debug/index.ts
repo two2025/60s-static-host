@@ -1,6 +1,6 @@
-import { paseArticleUrl } from '../src/parse-article-url.ts'
+import { parseArticleUrl } from '../src/core/parser.ts'
 
 const url =
-  'http://mp.weixin.qq.com/s?__biz=Mzk3NTMzOTU1Mg==&mid=2247486342&idx=2&sn=d89e2fd8e443047d506d52f514c5fd92&chksm=c4cc62c9f3bbebdf104cce56e6645c7a56f7cca5d544cd067da0e97dcc67623eba015728cefa#rd '
+  'http://mp.weixin.qq.com/s?__biz=Mzk3NTMzOTU1Mg==&mid=2247486384&idx=2&sn=b737ac572f301ce208a4f7ca051c22e9&chksm=c4cc62fff3bbebe90448d7f9d0da47a34c081abc9dd6b88f766e9925ded39ec2fe8958a5b401#rd'
 
-console.log(paseArticleUrl(url))
+console.log(parseArticleUrl(url))

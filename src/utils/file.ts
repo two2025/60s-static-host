@@ -1,5 +1,4 @@
 import fs from 'node:fs'
-import path from 'node:path'
 
 export function ensureDir(dirPath: string): void {
   if (!fs.existsSync(dirPath)) {

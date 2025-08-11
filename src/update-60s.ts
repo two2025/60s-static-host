@@ -1,4 +1,4 @@
-import { runUpdateCommand } from './commands/update.js'
+import { runUpdateCommand } from './commands/update'
 
 runUpdateCommand().catch(error => {
   console.error('Fatal error:', error)

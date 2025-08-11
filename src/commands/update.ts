@@ -1,6 +1,6 @@
-import { fetchAndProcessArticle } from '../core/fetcher.js'
-import { StorageService } from '../services/storage.js'
-import { debug, localeDate, isValidDateFormat } from '../utils/index.js'
+import { fetchAndProcessArticle } from '../core/fetcher'
+import { StorageService } from '../services/storage'
+import { debug, localeDate, isValidDateFormat } from '../utils'
 
 export async function runUpdateCommand(): Promise<void> {
   debug('process.argv', process.argv)

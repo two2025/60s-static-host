@@ -1,2 +1,2 @@
-export * from './article.js'
-export * from './config.js'
+export type * from './article'
+export type * from './config'
