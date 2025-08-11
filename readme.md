@@ -57,17 +57,11 @@ All data is stored in JSON format with consistent structure, for example:
     "微软宣布：已有21年历史的Skype，将于今年5月5日关停，建议用户迁移至Teams",
     "当地28日，特朗普与泽连斯基会晤不欢而散，双方多次发生争论。美方：不再谈了直接签，协议不含任何美国支持乌方的承诺！特朗普：泽连斯基不尊重美国，可以在准备好实现和平时再回来，泽连斯基：至少要一句安全保障"
   ],
-  "audio": {
-    "music": "https://res.wx.qq.com/voice/getvoice?mediaid=MzU2MDU4NDE1MV8yMjQ3NTI4NDY4",
-    "news": "https://res.wx.qq.com/voice/getvoice?mediaid=MzU2MDU4NDE1MV8yMjQ3NTI4NDY3"
-  },
   "tip": "不是每一次努力都会有收获，但是，每一次收获都必须努力，这是一个不公平的不可逆转的命题",
   "cover": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ftdBHhoElSUZiaskicl9Dic4U8BRibRUECnOm8ibvSWmmwshWYbrfjbribylhgqpx93JKib7tuo3emKrbTTnheibHwAKOQ/0?wx_fmt=jpeg",
   "link": "http://mp.weixin.qq.com/s?__biz=MzU2MDU4NDE1MQ==&mid=2247528469&idx=1&sn=bcf94efabe2079f576e694591c4400c3",
   "created": "2025/03/01 07:00:00",
-  "created_at": 1740783600000,
-  "updated": "2025/03/01 07:00:00",
-  "updated_at": 1740783600000
+  "created_at": 1740783600000
 }
 ```
 
