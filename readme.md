@@ -16,14 +16,14 @@ A lightweight repository hosting daily news data, automatically updated via GitH
 
 Access the latest data through:
 
-- Vercel CDN: https://60s-static-host.vercel.app (Project home Page)
+- Vercel CDN: https://60s-static.vercel.app (Project home Page)
 - GitHub Raw URL: https://raw.githubusercontent.com
 - jsDelivr CDN: https://cdn.jsdelivr.net/gh
 
 > [!TIP]
 > Replace `[yyyy]-[MM]-[dd]` with the desired date in `YYYY-MM-DD` format, such as `2025-02-08`.
 
-- Vercel CDN: `https://60s-static-host.vercel.app/60s/[yyyy]-[MM]-[dd].json`
+- Vercel CDN: `https://60s-static.vercel.app/60s/[yyyy]-[MM]-[dd].json`
 - GitHub Raw URL: `https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/[yyyy]-[MM]-[dd].json`
 - jsDelivr CDN: `https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/[yyyy]-[MM]-[dd].json`
 
