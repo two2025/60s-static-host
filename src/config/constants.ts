@@ -1,10 +1,11 @@
 export const WECHAT_FAKEIDS = {
-  每天60秒读懂世界: 'MzkwNDc5NTA0Mw==',
-  每天3分钟读懂世界: 'MzkwNjY1ODIxNw==',
-  每天1分钟读世界: 'Mzk3NTMzOTU1Mg==',
+  每天60秒读懂世界: 'MzkwNDc5NTA0Mw==', // mt36501
+  每天3分钟读懂世界: 'MzkwNjY1ODIxNw==', // hao36501
+  // 每天1分钟读世界: 'Mzk3NTMzOTU1Mg==',
+  每天100秒读懂世界: 'Mzg3NTQ0MjQwNg==', // TT100s-News
 } as const
 
-export const DEFAULT_WECHAT_FAKEID = WECHAT_FAKEIDS['每天1分钟读世界']
+export const DEFAULT_WECHAT_FAKEID = WECHAT_FAKEIDS['每天100秒读懂世界']
 
 export const REGEX_PATTERNS = {
   TIP: /^【((微语)|(每日金句))】/,
