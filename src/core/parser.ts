@@ -39,17 +39,21 @@ export async function parseArticleUrl(url: string): Promise<ParsedArticle> {
 
   debug('images', images)
 
-  const image = images.at(-3) || images.at(0) || ''
+  const image = images.at(-1) || images.at(0) || ''
 
-  const cover =
-    $('img')
-      .map((_, e) => ({
-        src: $(e).attr('data-src') || '',
-        dataS: $(e).attr('data-s') || '',
-      }))
-      .toArray()
-      .filter(e => e.dataS === '300,640')
-      .at(0)?.src || ''
+  // const image = images.at(-3) || images.at(0) || ''
+
+  // const cover =
+  //   $('img')
+  //     .map((_, e) => ({
+  //       src: $(e).attr('data-src') || '',
+  //       dataS: $(e).attr('data-s') || '',
+  //     }))
+  //     .toArray()
+  //     .filter(e => e.dataS === '300,640')
+  //     .at(0)?.src || ''
+
+  const cover = images.at(0) || ''
 
   debug('news', news)
   debug('tip', tip)
