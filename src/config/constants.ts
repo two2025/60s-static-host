@@ -8,7 +8,7 @@ export const WECHAT_FAKEIDS = {
 export const DEFAULT_WECHAT_FAKEID = WECHAT_FAKEIDS['每天100秒读懂世界']
 
 export const REGEX_PATTERNS = {
-  TIP: /^【((微语)|(每日金句))】/,
+  TIP: /^【([今每]日)?(微语|金句)】/,
   NEWS: /^\d+、/,
   END: /[；！～。，]\s*$/,
   DATE_FORMAT: /^\d{4}-\d{2}-\d{2}$/,
