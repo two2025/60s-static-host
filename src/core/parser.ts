@@ -26,9 +26,16 @@ export async function parseArticleUrl(url: string): Promise<ParsedArticle> {
 
   for (const line of data) {
     if (REGEX_PATTERNS.NEWS.test(line)) {
-      news.push(line.replace(REGEX_PATTERNS.NEWS, '').replace(REGEX_PATTERNS.END, ''))
+      news.push(
+        line
+          .replace(REGEX_PATTERNS.NEWS, '')
+          .replace(REGEX_PATTERNS.END, '')
+          .replace(REGEX_PATTERNS.AD, '')
+      )
     } else if (REGEX_PATTERNS.TIP.test(line)) {
-      tip = line.replace(REGEX_PATTERNS.TIP, '').replace(REGEX_PATTERNS.END, '')
+      tip = line
+        .replace(REGEX_PATTERNS.TIP, '')
+        .replace(REGEX_PATTERNS.END, ''.replace(REGEX_PATTERNS.AD, ''))
     }
   }
 
