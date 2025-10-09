@@ -19,19 +19,22 @@ Access the latest data through:
 - Vercel CDN: https://60s-static.viki.moe (Project home Page)
 - GitHub Raw URL: https://raw.githubusercontent.com
 - jsDelivr CDN: https://cdn.jsdelivr.net/gh
+- jsDelivr Mirror CDN: https://cdn.jsdmirror.com/gh
 
 > [!TIP]
-> Replace `[yyyy]-[MM]-[dd]` with the desired date in `YYYY-MM-DD` format, such as `2025-02-08`.
+> Replace `[yyyy]-[MM]-[dd]` with the desired date in `YYYY-MM-DD` format, such as `2025-10-08`.
 
 - Vercel CDN: `https://60s-static.viki.moe/60s/[yyyy]-[MM]-[dd].json`
 - GitHub Raw URL: `https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/[yyyy]-[MM]-[dd].json`
 - jsDelivr CDN: `https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/[yyyy]-[MM]-[dd].json`
+- jsDelivr Mirror CDN: `https://cdn.jsdmirror.com/gh/vikiboss/60s-static-host@main/static/60s/[yyyy]-[MM]-[dd].json`
 
 Example:
 
-- Vercel URL: https://60s-static.viki.moe/60s/2025-03-01.json
-- GitHub Raw URL: https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/2025-03-01.json
-- jsDelivr CDN: https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/2025-03-01.json
+- Vercel URL: https://60s-static.viki.moe/60s/2025-10-08.json
+- GitHub Raw URL: https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/2025-10-08.json
+- jsDelivr CDN: https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/2025-10-08.json
+- jsDelivr Mirror CDN: https://cdn.jsdmirror.com/gh/vikiboss/60s-static-host@main/static/60s/2025-10-08.json
 
 ## Data Format Example
 
@@ -39,29 +42,32 @@ All data is stored in JSON format with consistent structure, for example:
 
 ```json
 {
-  "date": "2025-03-01",
+  "date": "2025-10-08",
   "news": [
-    "证监会：东方集团披露的2020年至2023年财务信息严重不实，涉嫌重大财务造假，可能触及重大违法强制退市情形",
-    "湖南沅陵通报\"两船相撞致14人失联\"：截至2月28日晚，该起事故已致11人遇难，仍有5人失联",
-    "湖南长沙发布物业收费新规，空置房实行阶梯式优惠，媒体：有助于减轻住房持有成本、鼓励住房消费",
-    "黄山：3月3日起，黄山风景区、花山谜窟景区、太平湖景区三大景区对女性免门票7天，需至少提前1天预约",
-    "国家统计局：2024年GDP同比增长5%，人均超9.5万元！居民人均可支配收入41314元，比上年增长5.3%",
-    "28日，余华英被执行死刑，10年间拐卖17名儿童，连亲生骨肉也卖",
-    "现货黄金跳水：一周内金价自高点回落逾一百美元，金饰克价3天跌了18元",
-    "美方威胁以芬太尼问题为由对中国再加征10%关税，中方：望美方不要一错再错",
-    "美媒：美商务称已有25万人排队买特朗普移民金卡，将带来1.25万亿美元收入，美智库警告投资者或成\"冤大头\"",
-    "美媒：特朗普计划签署行政命令，将首次确定英语为美国官方语言",
-    "28日，比特币突然崩了！跌破81000美元，超15万人爆仓，近段时间，比特币被不断抛售，从峰值下跌了25%",
-    "尼加拉瓜宣布退出联合国人权理事会：滥用人权作为干预他国内政的借口",
-    "美媒：美国公布爱泼斯坦案首批文件，包括通讯录和“按摩师”名单等，有近百页被大段涂黑，美司法部长斥FBI私藏数千页文件不提交",
-    "微软宣布：已有21年历史的Skype，将于今年5月5日关停，建议用户迁移至Teams",
-    "当地28日，特朗普与泽连斯基会晤不欢而散，双方多次发生争论。美方：不再谈了直接签，协议不含任何美国支持乌方的承诺！特朗普：泽连斯基不尊重美国，可以在准备好实现和平时再回来，泽连斯基：至少要一句安全保障"
+    "交通运输部：部署返程高峰保障，全国增派应急人员 12 万人、车辆 3.5 万台，通过无人机巡查疏导车流。10 月 7 日，全国高速公路车流量同比增长 8.7%",
+    "国庆中秋长假进入尾声：节后国内游产品价格回落，最高降幅超过 50%",
+    "我国 9 月末外汇储备 33386.6 亿美元，创近 10 年新高；央行 9 月末黄金储备报 7406 万盎司，连续 11 个月增持黄金",
+    "国际期金价格突破每盎司 4000 美元，为历史上首次；国内多品牌金饰克价突破 1150 元",
+    "河北省秦皇岛一名 05 后男子拒服兵役被罚款 8.64 万元，并纳入国防失信名单，面临公务员录用、户籍标注等 7 项联合惩戒",
+    "青海通报：祁连山冷龙岭被困徒步者搜救结束 251 人被转移，其中 1 人因失温和高原反应不幸遇难",
+    "浙江温州：10 月 10 日 24 时起暂停实施汽车置换更新补贴政策",
+    "我国在固态电池领域实现新突破：研究出弯折超 20000 次的柔性电池，能量密度提升 86%",
+    "2025 年诺贝尔物理学奖揭晓：美法加三国科学家获得，以表彰他们在量子力学领域的贡献",
+    "港媒：香港一毒贩借口如厕从医院逃跑，上身赤裸戴手铐，警方正全力追缉",
+    "我国与乌拉圭签署农产品贸易升级协议，乌拉圭牛肉、柑橘等 8 类产品获得优先我国通关待遇，我国大米、茶叶准入乌拉圭门槛进一步降低，预计年内双边农产品贸易额将突破 50 亿美元",
+    "美媒：特朗普宣布明年 6 月 14 日在白宫办格斗冠军赛；特朗普称美国将对进口中型和重型卡车征收 25% 关税",
+    "美媒：美参议院未通过两党所提拨款法案，政府“关门”持续；美政府停摆致多个机场航班延误，一处机场近 6 小时无空管值班",
+    "加媒：加拿大艾伯塔省超 5 万名教师罢工，要求提高教学条件和薪酬，导致约 2000 所学校停课，超 73 万名学生受影响",
+    "外媒：本轮巴以冲突持续两年，巴方称已致加沙地带超 6.7 万人死亡，平均每天 77 名加沙儿童沦为孤儿；研究显示美国两年来对以色列军援至少 217 亿美元"
   ],
-  "tip": "不是每一次努力都会有收获，但是，每一次收获都必须努力，这是一个不公平的不可逆转的命题",
-  "cover": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ftdBHhoElSUZiaskicl9Dic4U8BRibRUECnOm8ibvSWmmwshWYbrfjbribylhgqpx93JKib7tuo3emKrbTTnheibHwAKOQ/0?wx_fmt=jpeg",
-  "link": "http://mp.weixin.qq.com/s?__biz=MzU2MDU4NDE1MQ==&mid=2247528469&idx=1&sn=bcf94efabe2079f576e694591c4400c3",
-  "created": "2025/03/01 07:00:00",
-  "created_at": 1740783600000
+  "cover": "https://mmbiz.qpic.cn/sz_mmbiz_png/ylbPx3dqvY8b5V6ARIP0csWQibKYR80BBjhqSCkbQ7Y7cPXJEnywMINzTreVEOF9cliccGxjXLF7orT3ibtcBl2IA/640?wx_fmt=png",
+  "image": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ylbPx3dqvY8b5V6ARIP0csWQibKYR80BBfvwMuD3icez8eiaibPrlfB6VIafBOic3d49rWfDXibrnzjoJgXTNBUgFpibQ/640?wx_fmt=jpeg",
+  "tip": "不说硬话，不做软事。知人不评人，知理不争论，看透不说透。早安！",
+  "link": "http://mp.weixin.qq.com/s?__biz=Mzg3NTQ0MjQwNg==&mid=2247495237&idx=1&sn=de2aeaa96ae0f93a4f1a63613fcf475d",
+  "created": "2025/10/08 06:41:51",
+  "created_at": 1759876911000,
+  "updated": "2025/10/08 06:41:51",
+  "updated_at": 1759876911000
 }
 ```
 
