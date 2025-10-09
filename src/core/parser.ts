@@ -93,12 +93,15 @@ export async function parseArticleUrlViaLLM(url: string): Promise<ParsedArticle>
 
   const model = 'gemini-2.5-flash'
   const baseURL = 'https://google-ai.deno.dev/v1beta/models'
+  const mainHtml = $('#page-content').html() || ''
 
-  const contents = [$('#page-content').html()].map(prompt => {
-    const parts: any[] = []
-    if (typeof prompt === 'string') parts.push({ text: prompt })
-    return { role: 'user', parts }
-  })
+  if (!mainHtml) {
+    return EMPTY_RESULT
+  }
+
+  debug('main html length', mainHtml.length)
+
+  const timeStart = performance.now()
 
   const response = await (
     await fetch(`${baseURL}/${model}:generateContent?key=${apiKey}`, {
@@ -146,7 +149,7 @@ export async function parseArticleUrlViaLLM(url: string): Promise<ParsedArticle>
             },
           ],
         },
-        contents,
+        contents: [{ role: 'user', parts: [{ text: mainHtml }] }],
         generationConfig: {
           responseMimeType: 'application/json',
           responseSchema: {
@@ -165,9 +168,13 @@ export async function parseArticleUrlViaLLM(url: string): Promise<ParsedArticle>
     })
   ).json()
 
+  console.log('LLM request cost', Math.round((performance.now() - timeStart) * 1000) / 1000, 'ms')
+
   // console.log('Gemini response:', JSON.stringify(response, null, 2))
   try {
     const data = JSON.parse(response?.candidates?.[0]?.content?.parts?.[0]?.text || '{}')
+
+    debug('llm data', data)
 
     if (!('news' in data) || !('cover' in data) || !('image' in data) || !('tip' in data)) {
       console.error('Invalid Gemini response format:', data)
