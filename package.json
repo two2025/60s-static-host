@@ -4,7 +4,7 @@
   "packageManager": "pnpm@10.14.0",
   "scripts": {
     "update": "esno ./src/update-60s.ts",
-    "update:local": "esno --env-file=.env ./src/update-60s.ts",
+    "update:local": "esno --env-file=.env ./src/update-60s.ts --date=2025-10-09",
     "debug": "esno ./debug/index.ts"
   },
   "author": "Viki <hi@viki.moe> (https://github.com/vikiboss)",

@@ -1,46 +1,3 @@
-# 60s Static Data Host
-
-![Update Status](https://github.com/vikiboss/60s-static-host/workflows/schedule/badge.svg)
-
-A lightweight repository hosting daily news data, automatically updated via GitHub Actions.
-
-## Overview
-
-- 🔄 Auto-updates daily
-- 📰 Stores curated news data
-- 🚀 Fast static hosting
-- 🔑 Easy data access
-- 📊 REST API friendly & JSON format
-
-## Usage
-
-Access the latest data through:
-
-- Vercel CDN: https://60s-static.viki.moe (Project home Page)
-- GitHub Raw URL: https://raw.githubusercontent.com
-- jsDelivr CDN: https://cdn.jsdelivr.net/gh
-- jsDelivr Mirror CDN: https://cdn.jsdmirror.com/gh
-
-> [!TIP]
-> Replace `[yyyy]-[MM]-[dd]` with the desired date in `YYYY-MM-DD` format, such as `2025-10-08`.
-
-- Vercel CDN: `https://60s-static.viki.moe/60s/[yyyy]-[MM]-[dd].json`
-- GitHub Raw URL: `https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/[yyyy]-[MM]-[dd].json`
-- jsDelivr CDN: `https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/[yyyy]-[MM]-[dd].json`
-- jsDelivr Mirror CDN: `https://cdn.jsdmirror.com/gh/vikiboss/60s-static-host@main/static/60s/[yyyy]-[MM]-[dd].json`
-
-Example:
-
-- Vercel URL: https://60s-static.viki.moe/60s/2025-10-08.json
-- GitHub Raw URL: https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/2025-10-08.json
-- jsDelivr CDN: https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/2025-10-08.json
-- jsDelivr Mirror CDN: https://cdn.jsdmirror.com/gh/vikiboss/60s-static-host@main/static/60s/2025-10-08.json
-
-## Data Format Example
-
-All data is stored in JSON format with consistent structure, for example:
-
-```json
 {
   "date": "2025-10-08",
   "news": [
@@ -63,14 +20,13 @@ All data is stored in JSON format with consistent structure, for example:
   "cover": "https://mmbiz.qpic.cn/sz_mmbiz_png/ylbPx3dqvY8b5V6ARIP0csWQibKYR80BBjhqSCkbQ7Y7cPXJEnywMINzTreVEOF9cliccGxjXLF7orT3ibtcBl2IA/640?wx_fmt=png",
   "image": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ylbPx3dqvY8b5V6ARIP0csWQibKYR80BBfvwMuD3icez8eiaibPrlfB6VIafBOic3d49rWfDXibrnzjoJgXTNBUgFpibQ/640?wx_fmt=jpeg",
   "tip": "不说硬话，不做软事。知人不评人，知理不争论，看透不说透。早安！",
+  "audio": {
+    "music": "",
+    "news": ""
+  },
   "link": "http://mp.weixin.qq.com/s?__biz=Mzg3NTQ0MjQwNg==&mid=2247495237&idx=1&sn=de2aeaa96ae0f93a4f1a63613fcf475d",
   "created": "2025/10/08 06:41:51",
   "created_at": 1759876911000,
   "updated": "2025/10/08 06:41:51",
   "updated_at": 1759876911000
 }
-```
-
-## License
-
-MIT

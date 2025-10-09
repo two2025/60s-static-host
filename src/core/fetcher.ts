@@ -1,5 +1,5 @@
 import { fetchArticles } from '../services/wechat'
-import { parseArticleUrl } from './parser'
+import { parseArticleUrl, parseArticleUrlViaLLM } from './parser'
 import { debug, localeTime } from '../utils'
 import { getWeChatConfig } from '../config'
 
@@ -36,7 +36,13 @@ export async function fetchAndProcessArticle(date: string): Promise<SavedData | 
   }
 
   const detailLink = targetArticle.link
-  const parsedArticle = await parseArticleUrl(detailLink)
+
+  let parsedArticle = await parseArticleUrlViaLLM(detailLink)
+
+  if (!parsedArticle.news.length) {
+    console.log('LLM parser failed, fallback to standard parser')
+    parsedArticle = await parseArticleUrl(detailLink)
+  }
 
   if (!parsedArticle.news.length) {
     console.log(`No news found in article: ${detailLink}`)
