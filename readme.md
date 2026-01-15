@@ -1,10 +1,10 @@
 # 60s 每日新闻 API
 
-![Update Status](https://github.com/vikiboss/60s-static-host/workflows/schedule/badge.svg)
+![Update Status](https://github.com/two2025/60s-static-host/workflows/schedule/badge.svg)
 
 自动化每日新闻聚合服务，通过多个 CDN 提供 JSON 数据和图片访问。
 
-**🔗 项目主页**: https://60s-static.viki.moe
+**🔗 项目主页**: https://60s-static.two2025.moe
 
 ## 快速开始
 
@@ -15,25 +15,25 @@
 **JSON 数据:**
 ```
 https://60s-static.viki.moe/60s/[date].json
-https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/[date].json
-https://cdn.jsdmirror.com/gh/vikiboss/60s-static-host@main/static/60s/[date].json
+https://cdn.jsdelivr.net/gh/two2025/60s-static-host@main/static/60s/[date].json
+https://cdn.jsdmirror.com/gh/two2025/60s-static-host@main/static/60s/[date].json
 ```
 
 **PNG 图片:**
 ```
 https://60s-static.viki.moe/images/[date].png
-https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/images/[date].png
-https://cdn.jsdmirror.com/gh/vikiboss/60s-static-host@main/static/images/[date].png
+https://cdn.jsdelivr.net/gh/two2025/60s-static-host@main/static/images/[date].png
+https://cdn.jsdmirror.com/gh/two2025/60s-static-host@main/static/images/[date].png
 ```
 
 ### 示例请求
 
 ```bash
 # 获取 2025-10-24 的新闻数据
-curl https://60s-static.viki.moe/60s/2025-10-24.json
+curl https://60s-static.two2025.moe/60s/2025-10-24.json
 
 # 获取对应的图片
-curl https://cdn.jsdmirror.com/gh/vikiboss/60s-static-host@main/static/images/2025-10-24.png
+curl https://cdn.jsdmirror.com/gh/two2025/60s-static-host@main/static/images/2025-10-24.png
 ```
 
 ## 数据格式
