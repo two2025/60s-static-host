@@ -1,76 +1,85 @@
-# 60s Static Data Host
+# 60s 每日新闻 API
 
 ![Update Status](https://github.com/vikiboss/60s-static-host/workflows/schedule/badge.svg)
 
-A lightweight repository hosting daily news data, automatically updated via GitHub Actions.
+自动化每日新闻聚合服务，通过多个 CDN 提供 JSON 数据和图片访问。
 
-## Overview
+**🔗 项目主页**: https://60s-static.viki.moe
 
-- 🔄 Auto-updates daily
-- 📰 Stores curated news data
-- 🚀 Fast static hosting
-- 🔑 Easy data access
-- 📊 REST API friendly & JSON format
+## 快速开始
 
-## Usage
+### API 端点
 
-Access the latest data through:
+将 `[date]` 替换为 `YYYY-MM-DD` 格式的日期，例如 `2025-10-24`
 
-- Vercel CDN: https://60s-static.viki.moe (Project home Page)
-- GitHub Raw URL: https://raw.githubusercontent.com
-- jsDelivr CDN: https://cdn.jsdelivr.net/gh
-- jsDelivr Mirror CDN: https://cdn.jsdmirror.com/gh
+**JSON 数据:**
+```
+https://60s-static.viki.moe/60s/[date].json
+https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/[date].json
+https://cdn.jsdmirror.com/gh/vikiboss/60s-static-host@main/static/60s/[date].json
+```
 
-> [!TIP]
-> Replace `[yyyy]-[MM]-[dd]` with the desired date in `YYYY-MM-DD` format, such as `2025-10-08`.
+**PNG 图片:**
+```
+https://60s-static.viki.moe/images/[date].png
+https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/images/[date].png
+https://cdn.jsdmirror.com/gh/vikiboss/60s-static-host@main/static/images/[date].png
+```
 
-- Vercel CDN: `https://60s-static.viki.moe/60s/[yyyy]-[MM]-[dd].json`
-- GitHub Raw URL: `https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/[yyyy]-[MM]-[dd].json`
-- jsDelivr CDN: `https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/[yyyy]-[MM]-[dd].json`
-- jsDelivr Mirror CDN: `https://cdn.jsdmirror.com/gh/vikiboss/60s-static-host@main/static/60s/[yyyy]-[MM]-[dd].json`
+### 示例请求
 
-Example:
+```bash
+# 获取 2025-10-24 的新闻数据
+curl https://60s-static.viki.moe/60s/2025-10-24.json
 
-- Vercel URL: https://60s-static.viki.moe/60s/2025-10-08.json
-- GitHub Raw URL: https://raw.githubusercontent.com/vikiboss/60s-static-host/refs/heads/main/static/60s/2025-10-08.json
-- jsDelivr CDN: https://cdn.jsdelivr.net/gh/vikiboss/60s-static-host@main/static/60s/2025-10-08.json
-- jsDelivr Mirror CDN: https://cdn.jsdmirror.com/gh/vikiboss/60s-static-host@main/static/60s/2025-10-08.json
+# 获取对应的图片
+curl https://cdn.jsdmirror.com/gh/vikiboss/60s-static-host@main/static/images/2025-10-24.png
+```
 
-## Data Format Example
-
-All data is stored in JSON format with consistent structure, for example:
+## 数据格式
 
 ```json
 {
-  "date": "2025-10-08",
+  "date": "2025-10-24",
   "news": [
-    "交通运输部：部署返程高峰保障，全国增派应急人员 12 万人、车辆 3.5 万台，通过无人机巡查疏导车流。10 月 7 日，全国高速公路车流量同比增长 8.7%",
-    "国庆中秋长假进入尾声：节后国内游产品价格回落，最高降幅超过 50%",
-    "我国 9 月末外汇储备 33386.6 亿美元，创近 10 年新高；央行 9 月末黄金储备报 7406 万盎司，连续 11 个月增持黄金",
-    "国际期金价格突破每盎司 4000 美元，为历史上首次；国内多品牌金饰克价突破 1150 元",
-    "河北省秦皇岛一名 05 后男子拒服兵役被罚款 8.64 万元，并纳入国防失信名单，面临公务员录用、户籍标注等 7 项联合惩戒",
-    "青海通报：祁连山冷龙岭被困徒步者搜救结束 251 人被转移，其中 1 人因失温和高原反应不幸遇难",
-    "浙江温州：10 月 10 日 24 时起暂停实施汽车置换更新补贴政策",
-    "我国在固态电池领域实现新突破：研究出弯折超 20000 次的柔性电池，能量密度提升 86%",
-    "2025 年诺贝尔物理学奖揭晓：美法加三国科学家获得，以表彰他们在量子力学领域的贡献",
-    "港媒：香港一毒贩借口如厕从医院逃跑，上身赤裸戴手铐，警方正全力追缉",
-    "我国与乌拉圭签署农产品贸易升级协议，乌拉圭牛肉、柑橘等 8 类产品获得优先我国通关待遇，我国大米、茶叶准入乌拉圭门槛进一步降低，预计年内双边农产品贸易额将突破 50 亿美元",
-    "美媒：特朗普宣布明年 6 月 14 日在白宫办格斗冠军赛；特朗普称美国将对进口中型和重型卡车征收 25% 关税",
-    "美媒：美参议院未通过两党所提拨款法案，政府“关门”持续；美政府停摆致多个机场航班延误，一处机场近 6 小时无空管值班",
-    "加媒：加拿大艾伯塔省超 5 万名教师罢工，要求提高教学条件和薪酬，导致约 2000 所学校停课，超 73 万名学生受影响",
-    "外媒：本轮巴以冲突持续两年，巴方称已致加沙地带超 6.7 万人死亡，平均每天 77 名加沙儿童沦为孤儿；研究显示美国两年来对以色列军援至少 217 亿美元"
+    "新闻条目 1",
+    "新闻条目 2",
+    "..."
   ],
-  "cover": "https://mmbiz.qpic.cn/sz_mmbiz_png/ylbPx3dqvY8b5V6ARIP0csWQibKYR80BBjhqSCkbQ7Y7cPXJEnywMINzTreVEOF9cliccGxjXLF7orT3ibtcBl2IA/640?wx_fmt=png",
-  "image": "https://mmbiz.qpic.cn/sz_mmbiz_jpg/ylbPx3dqvY8b5V6ARIP0csWQibKYR80BBfvwMuD3icez8eiaibPrlfB6VIafBOic3d49rWfDXibrnzjoJgXTNBUgFpibQ/640?wx_fmt=jpeg",
-  "tip": "不说硬话，不做软事。知人不评人，知理不争论，看透不说透。早安！",
-  "link": "http://mp.weixin.qq.com/s?__biz=Mzg3NTQ0MjQwNg==&mid=2247495237&idx=1&sn=de2aeaa96ae0f93a4f1a63613fcf475d",
-  "created": "2025/10/08 06:41:51",
-  "created_at": 1759876911000,
-  "updated": "2025/10/08 06:41:51",
-  "updated_at": 1759876911000
+  "cover": "https://...",
+  "image": "https://...",
+  "tip": "每日金句",
+  "link": "https://...",
+  "created": "2025/10/24 06:30:00",
+  "created_at": 1736900400000,
+  "updated": "2025/10/24 06:30:00",
+  "updated_at": 1736900400000
 }
 ```
 
+**字段说明:**
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `date` | string | 日期 (YYYY-MM-DD) |
+| `news` | string[] | 新闻列表 (~15条) |
+| `cover` | string | 封面图片 URL |
+| `image` | string | 生成的新闻卡片图片 URL |
+| `tip` | string | 每日金句 |
+| `link` | string | 原文链接 |
+| `created` | string | 创建时间 (可读格式) |
+| `created_at` | number | 创建时间戳 (毫秒) |
+| `updated` | string | 更新时间 (可读格式) |
+| `updated_at` | number | 更新时间戳 (毫秒) |
+
+## 更新时间
+
+数据每日自动更新，时间窗口: **00:00 - 10:00 (UTC+8)**
+
 ## License
 
-MIT
+[MIT](license) License © 2022-PRESENT Viki
+
+---
+
+**⚠️ 免责声明**: 数据来源于公开网络，不保证准确性。本项目与任何新闻机构无关联。
